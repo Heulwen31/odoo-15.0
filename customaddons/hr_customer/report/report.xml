@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hr_report_detail_id" model="ir.actions.report">
+        <field name="name">HR Report Detail</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type" eval="'qweb-pdf'" />
+        <field name="report_name" eval="'hr_customer.report_property_hr'" />
+        <field name="report_file" eval="'hr_customer.report_property_hr'" />
+        <field name="binding_model_id" ref="model_hr_employee" />
+        <field name="binding_type" eval="'report'" />
+    </record>
+</odoo>

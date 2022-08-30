@@ -1,0 +1,154 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="static/css/main.css"?>
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="student_list_view">
+            <field name="name">student list</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="status=='Fail'">
+                    <field name="student_id"/>
+                    <field name="student_name"/>
+                    <field name="student_dob"/>
+                    <field name="student_poo"/>
+                    <field name="student_score"/>
+                    <field name="student_sex"/>
+                    <field name="teacher_id"/>
+                    <field name="status" decoration-danger="status=='Fail'"
+                           decoration-warning="status in ('Average Good', 'Good')"
+                           decoration-success="status in ('Very Good', 'Excellent')" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- explicit form view definition -->
+
+        <record model="ir.ui.view" id="student_form_view">
+            <field name="name">student form</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="set_smart" type="object" string="Smart"/>
+                        <button name="set_stupid" type="object" string="Stupid"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="student_name"/>
+                            <field name="student_poo"/>
+                            <field name="student_score"/>
+                        </group>
+                        <group>
+                            <field name="student_dob"/>
+                            <field name="student_sex"/>
+                            <field name="student_stupid"/>
+                        </group>
+                        <notebook>
+                            <page name="Teacher" string="Teacher">
+                                <group>
+                                    <field name="teacher_id"/>
+                                </group>
+                            </page>
+                            <page name="Subject" string="Subject">
+                                <group>
+                                    <field name="student_subject_ids" widget="many2many_tags" string="Learn Subject"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit graph view definition -->
+        <record id="student_graph_view" model="ir.ui.view">
+            <field name="name">student graph view</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <graph type="bar">
+                    <field name="student_sex"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- explicit kanban view definition -->
+        <record id="partner_kanban_view" model="ir.ui.view">
+            <field name="name">student kaban view</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" default_group_by="student_sex" default_order="student_name desc">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <br/>
+                                    <field name="student_id"/>
+                                    <br/>
+                                    <field name="student_name"/>
+                                    <br/>
+                                    <field name="student_poo"/>
+                                    <br/>
+                                    <field name="student_score"/>
+                                    <br/>
+                                </div>
+                                <hr/>
+                                <div>
+                                    <field name="student_dob"/>
+                                    <br/>
+                                    <field name="student_sex"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- explicit search view definition -->
+        <record model="ir.ui.view" id="student_search_view">
+            <field name="name">Student Search</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="student_name" string="Student Name"/>
+                    <field name="student_id" string="Student ID"/>
+                    <field name="student_poo" string="Student POO"/>
+                    <group expand='0' string="Filters">
+                        <filter name="male_filter" string="Male" domain="[('student_sex', '=',  'male')]"/>
+                        <filter name="female_filter" string="Female" domain="[('student_sex', '=',  'female')]"/>
+                    </group>
+
+                    <group expand='0' string='Group by...'>
+                        <filter string='Gender' name="gender" context="{'group_by': 'student_sex'}"/>
+                        <filter string='Place of origin' name="place_of_origin" context="{'group_by': 'student_poo'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="student_action_window">
+            <field name="name">student window</field>
+            <field name="res_model">student.student</field>
+            <field name="view_mode">tree,graph,kanban,form</field>
+        </record>
+
+        <!-- Top menu item -->
+
+        <menuitem name="Academy" id="student_menu_root"/>
+
+        <!-- menu categories -->
+
+        <menuitem name="Students" id="student_menu_1" parent="student_menu_root"/>
+        <!-- <menuitem name="Menu 2" id="student_menu_2" parent="student_menu_root" /> -->
+
+        <!-- actions -->
+
+        <menuitem name="List" id="student_menu_1_list" parent="student_menu_1" action="student_action_window"/>
+        <!-- <menuitem name="Server to list" id="student" parent="student_menu_2" action="student_action_server" /> -->
+
+    </data>
+</odoo>

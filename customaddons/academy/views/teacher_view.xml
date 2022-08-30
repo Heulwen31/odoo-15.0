@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- explicit list view difintion -->
+
+        <record model="ir.ui.view" id="teacher_view_list">
+            <field name="name">Teacher View</field>
+            <field name="model">teacher.teacher</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="teacher_id" readonly="1"/>
+                    <field name="teacher_name"/>
+                    <field name="teacher_dob"/>
+                    <field name="teacher_poo"/>
+                    <field name="teacher_phone"/>
+                    <field name="teacher_sex"/>
+                    <field name="teacher_name"/>
+<!--                    <field name="teacher_avatar" widget="image"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="teacher_view_form">
+            <field name="name">Teacher Form</field>
+            <field name="model">teacher.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="teacher_id" readonly="1"/>
+                                <field name="teacher_name"/>
+                                <field name="teacher_phone"/>
+                                <field name="teacher_poo"/>
+<!--                                <field name="teacher_reference" readonly="1"/>-->
+                            </group>
+                            <group>
+                                <field name="teacher_dob"/>
+                                <field name="teacher_sex"/>
+                                <field name="teacher_avatar" widget="image"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="teacher_action_window">
+            <field name="name">teacher window</field>
+            <field name="res_model">teacher.teacher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu Item -->
+
+        <!-- <menuitem name="teacher" id="teacher_menu_root" /> -->
+
+        <!-- menu category -->
+
+        <menuitem name="Teacher" id="teacher_menu_1" parent="student_menu_root"/>
+
+        <!-- action -->
+
+        <menuitem name="List" id="teacher_menu_1_list" parent="teacher_menu_1" action="teacher_action_window"/>
+
+    </data>
+</odoo>

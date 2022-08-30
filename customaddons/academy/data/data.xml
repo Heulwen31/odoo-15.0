@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        sequence for teacher        -->
+        <record id="seq_teacher_identify" model="ir.sequence">
+            <field name="name">Teacher sequence</field>
+            <field name="code">teacher.teacher</field>
+            <field name="prefix">TC</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

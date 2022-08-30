@@ -1,0 +1,56 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- explicit list view difintion -->
+
+        <record model="ir.ui.view" id="subject_view_list">
+            <field name="name">subject view</field>
+            <field name="model">subject.subject</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="subject_id" />
+                    <field name="subject_name" />
+                    <field name="subject_credit" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="subject_view_form">
+            <field name="name">subject form</field>
+            <field name="model">subject.subject</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="subject_id" />
+                                <field name="subject_name" />
+                                <field name="subject_credit" />
+                            </group>
+                            <group>
+                                <field name="teacher_subject_id" widget="many2many_tags" string="Teacher teach the subject" />
+                            </group>
+                        </group>>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="subject_action_window">
+            <field name="name">subject window</field>
+            <field name="res_model">subject.subject</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <!-- Menu Item -->
+        <menuitem name="Subject" id="subject_menu_1" parent="student_menu_root" />
+
+        <!-- action -->
+        <menuitem name="List" id="subject_menu_1_list" parent="subject_menu_1" action="subject_action_window" />
+    </data>
+</odoo>

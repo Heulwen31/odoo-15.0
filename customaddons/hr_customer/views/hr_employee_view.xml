@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">Employee List View Inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="after">
+                    <field name="teacher_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_employee_tree_inherit" model="ir.ui.view">
+            <field name="name">Employee List View Inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_phone']" position="after">
+                    <field name="teacher_id"/>
+                    <field name="teacher_name"/>
+                    <field name="teacher_phone"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="open_view_employee_list_1" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form,kanban,search</field>
+        </record>
+
+
+        <menuitem name="Hr Employee" id="hr_employee_menu_root"/>
+
+        <menuitem name="Hr Employee" id="hr_employee_menu_root_1" parent="hr_employee_menu_root"
+                  action="open_view_employee_list_1"/>
+
+    </data>
+</odoo>

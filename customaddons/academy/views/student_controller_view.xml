@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="test_form">
+        <t t-call="website.layout">
+            <body>
+                <div class="container">
+                    <div class="page">
+                        <div class="row">
+                            <form id="get_data" t-aff-action="/student/required" method="GET">
+                                <input type="checkbox" name="id" value="id">ID</input>
+                                <input type="checkbox" name="name" value="name">Name</input>
+                                <input type="submit" value="Submit"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </t>
+    </template>
+</odoo>
